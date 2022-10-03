@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
+    <link rel="icon" href="https://img.icons8.com/external-bright-fill-juicy-fish/344/external-ml-data-science-bright-fill-bright-fill-juicy-fish.png" type="image/png">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+    body{
+        background: #25163d;
+        color: orange;
+        font-family: 'Ubuntu', sans-serif;
+    }
+    header{
+        text-align: center;
+        font-weight: bolder;
+        font-size: 25px;
+    }
+    .form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 10px;
+        backdrop-filter: blur(0);
+        -webkit-backdrop-filter: blur(0);
+        background: hsla(0,0%,100%,.19);
+        border: 1px solid hsla(0,0%,100%,.14);
+        border-radius: 20px;
+        box-shadow: 0 0 20px 0 #fff;
+        width: 70%;
+    }
+    .forms{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .files{
+        padding: 10px;
+        border: 2px solid #000000;
+        border-radius: 5px;
+        background-color: aquamarine;
+        color: blue;
+        font-weight: bold;
+    }
+    .btn{
+        padding: 10px;
+        border: 2px solid #000000;
+        border-radius: 5px;
+        background-color: aquamarine;
+        color: blue;
+        font-weight: bold;
+        width: 100px;
+    }
+    .ans{
+        padding: 10px;
+        border: 2px solid #000000;
+        border-radius: 5px;
+        background-color: aquamarine;
+        color: blue;
+        font-weight: bold;
+        width: 150px;
+        text-align: center;
+    }
+    .Explore{
+    width: 250px;
+    height: 250px;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+    color: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    background: linear-gradient(-45deg, #FFA63D, #FF3D77, #338AFF, #3CF0C5);
+    background-size: 600%;
+    animation: anime 16s linear infinite;
+    position: absolute;
+     z-index: -1;
+     filter: blur(100px);
+     opacity: 0.8;
+}
+@keyframes anime{
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
+}
+</style>
+<body>
+    <header>
+        <div class="Explore"></div>
+    <h2>Image Classification</h2>
+    </header>
+    <center><div class="form">
+    <form action="/" method="POST" enctype="multipart/form-data" class="forms">
+        <input type="file" accept='image/*' onchange="readURL(this); show();" class="files" name="imagefile" required>
+        <br>
+        <input type="submit" value="Predict" class="btn">
+        <br>
+        <img src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="No Image" id="img" class="result" style="height: 50px;">
+    </form>
+    {% if prediction %}
+        <p class="ans">Prediction:<br> {{ prediction }}</p>
+    {% endif %}
+    </div></center>
+    <script>
+        function show(){
+            document.getElementById("img").style.height = "150px";
+        }
+        function readURL(input) {
+          if (input.files && input.files[0]) {
+            document.querySelector("#img").setAttribute("display","none");
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.querySelector("#img").setAttribute("src",e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]); 
+          }
+        }
+        </script>
+</body>
+</html>
